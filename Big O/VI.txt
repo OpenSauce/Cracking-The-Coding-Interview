@@ -1,0 +1,12 @@
+1. O(n) /
+2. O(n) /
+3. O(1) /
+4. O(ab) X O(a/b)
+5. O(logn) /
+6. O(rootn) /
+7. O(n) /
+8. O(nlogn) X O(n)
+9. O(n) X O(n^2)
+10. O(n) X O(logn)
+11. O(logn) X O(ab^a)
+12. O(nlogn) X O(blogb + alogb)
