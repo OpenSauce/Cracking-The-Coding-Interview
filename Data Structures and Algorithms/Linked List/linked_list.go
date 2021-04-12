@@ -39,6 +39,22 @@ func (l *List) Display() {
 	fmt.Println()
 }
 
+func (l *List) Delete(key interface{}) {
+	list := l.head
+	if list.key == key {
+		l.head = list.next
+	} else {
+		for list != nil {
+			if list.next.key == key {
+				list.next = list.next.next;
+				break
+			}
+			list = list.next
+		}
+		fmt.Println()
+	}
+}
+
 func main() {
 	link := List{}
 	link.Insert(5)
@@ -47,6 +63,7 @@ func main() {
 	link.Insert(22)
 	link.Insert(28)
 	link.Insert(36)
+	link.Delete(9)
 
 	fmt.Println("\n==============================")
 	fmt.Printf("Head: %v\n", link.head.key)
