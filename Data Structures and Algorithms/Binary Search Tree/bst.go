@@ -84,7 +84,7 @@ func Delete(t *Tree, z *Node) {
 	} else if z.right == nil {
 		Transplant(t, z, z.left)
 	} else {
-		y := Minimum(t, z.right) //minimum element in right subtree
+		y := Minimum(t, z.right) 
 		if y.parent != z {
 			Transplant(t, y, y.right)
 			y.right = z.right
