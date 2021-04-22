@@ -61,3 +61,61 @@ func TestQuestionThree(t *testing.T) {
 		}
 	})
 }
+
+func TestQuestionFour(t *testing.T) {
+	t.Run("Palindrome #1", func(t *testing.T) {
+		got := QuestionFour("tactcoa")
+		want := true
+
+		if got != want {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	})
+
+	t.Run("Panlindrome #2", func(t *testing.T) {
+		got := QuestionFour("bobohehe")
+		want := true
+
+		if got != want {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	})
+
+	t.Run("Panlindrome #3", func(t *testing.T) {
+		got := QuestionFour("hellothere")
+		want := false
+
+		if got != want {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	})
+}
+
+func TestQuestionFive(t *testing.T) {
+	t.Run("One Away #1", func(t *testing.T) {
+		got := QuestionFive("Hello", "Hellol")
+		want := true
+
+		if got != want {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	})
+
+	t.Run("One Away #2", func(t *testing.T) {
+		got := QuestionFive("Bake", "Pake")
+		want := true
+
+		if got != want {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	})
+
+	t.Run("One Away #3", func(t *testing.T) {
+		got := QuestionFive("One", "Two")
+		want := false
+
+		if got != want {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	})
+}
