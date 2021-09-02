@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 )
@@ -52,22 +53,44 @@ func QuestionFour(word string) bool {
 }
 
 func QuestionFive(word1 string, word2 string) bool {
-	var m = make(map[rune]int)
+	var m = make(map[rune]struct{})
 
 	for _, char := range word1 {
-		if m[char] == 1 {
+		if m[char] == struct{}{} {
 			delete(m, char)
 		} else {
-			m[char] = 1
+			m[char] = struct{}{}
 		}
 	}
 
 	for _, char := range word2 {
-		if m[char] == 1 {
+		if m[char] == struct{}{} {
 			delete(m, char)
 		} else {
-			m[char] = 1
+			m[char] = struct{}{}
 		}
 	}
-	return true
+
+	return len(m) <= 1 || (len(m) == 2 && len(word2) == len(word1))
+}
+
+func QuestionSix(input string) string {
+	var res string
+	for i := 0; i < len(input); i++ {
+		char := input[i]
+		for j := i; j < len(input); j++ {
+			if j+1 == len(input) {
+				res += fmt.Sprintf("%c%d", input[j], j-i+1)
+				return res
+			}
+			if char == input[j] {
+				continue
+			}
+			val := j - i
+			res += fmt.Sprintf("%c%d", char, val)
+			i = j - 1
+			break
+		}
+	}
+	return res
 }

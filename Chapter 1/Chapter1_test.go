@@ -93,7 +93,7 @@ func TestQuestionFour(t *testing.T) {
 
 func TestQuestionFive(t *testing.T) {
 	t.Run("One Away #1", func(t *testing.T) {
-		got := QuestionFive("Hello", "Hellol")
+		got := QuestionFive("Hello", "Hello1")
 		want := true
 
 		if got != want {
@@ -111,11 +111,27 @@ func TestQuestionFive(t *testing.T) {
 	})
 
 	t.Run("One Away #3", func(t *testing.T) {
-		got := QuestionFive("One", "Two")
-		want := false
+		got := QuestionFive("One", "One")
+		want := true
 
 		if got != want {
 			t.Errorf("got: %v; want: %v", got, want)
 		}
 	})
+}
+
+func TestQuestionSix(t *testing.T) {
+	var testCase = []struct {
+		in   string
+		want string
+	}{
+		{"aaaabbbbcccddddeff", "a4b4c3d4e1f2"},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionSix(tt.in)
+		if got != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+	}
 }
