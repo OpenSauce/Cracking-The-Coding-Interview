@@ -1,4 +1,4 @@
-package main
+package chapter_one
 
 import (
 	"fmt"
@@ -79,16 +79,25 @@ func QuestionSix(input string) string {
 	for i := 0; i < len(input); i++ {
 		char := input[i]
 		for j := i; j < len(input); j++ {
-			if j+1 == len(input) {
-				res += fmt.Sprintf("%c%d", input[j], j-i+1)
-				return res
-			}
-			if char == input[j] {
+			if char == input[j] && j+1 != len(input) {
 				continue
 			}
+
 			val := j - i
+
+			if j+1 == len(input) {
+				if char != input[j] {
+					res += fmt.Sprintf("%c%d", char, val)
+					res += fmt.Sprintf("%c%d", input[j], val)
+					return res
+				}
+				res += fmt.Sprintf("%c%d", char, val+1)
+				return res
+			}
+
 			res += fmt.Sprintf("%c%d", char, val)
 			i = j - 1
+
 			break
 		}
 	}

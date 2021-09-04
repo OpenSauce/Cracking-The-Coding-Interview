@@ -4,7 +4,6 @@ import (
 	"fmt"
 )
 
-
 type Node struct {
 	data   int
 	right  *Node
@@ -84,7 +83,7 @@ func Delete(t *Tree, z *Node) {
 	} else if z.right == nil {
 		Transplant(t, z, z.left)
 	} else {
-		y := Minimum(t, z.right) 
+		y := Minimum(t, z.right)
 		if y.parent != z {
 			Transplant(t, y, y.right)
 			y.right = z.right
