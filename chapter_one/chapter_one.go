@@ -103,3 +103,43 @@ func QuestionSix(input string) string {
 	}
 	return res
 }
+
+func QuestionSeven(in [][]int) [][]int {
+	res := make([][]int, len(in))
+	for i := range res {
+		res[i] = make([]int, len(in))
+	}
+
+	for i := 0; i < len(in); i++ {
+		for j := 0; j < len(in[i]); j++ {
+			x := j
+			y := len(in) - i - 1
+			res[x][y] = in[i][j]
+		}
+	}
+	return res
+}
+
+func QuestionEight(in [][]int) [][]int {
+	res := in
+
+	for i := 0; i < len(in); i++ {
+		for j := 0; j < len(in[i]); j++ {
+			if in[i][j] == 0 {
+				for k := 0; k < len(in); k++ {
+					res[k][j] = 0
+				}
+				for k := 0; k < len(in[i]); k++ {
+					res[i][k] = 0
+				}
+				return res
+			}
+		}
+	}
+	return res
+}
+
+func QuestionNine(in, in2 string) bool {
+	fullString := in + in
+	return strings.Contains(fullString, in2)
+}

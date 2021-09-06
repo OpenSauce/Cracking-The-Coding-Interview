@@ -46,7 +46,7 @@ func (l *List) Delete(key interface{}) {
 	} else {
 		for list != nil {
 			if list.next.key == key {
-				list.next = list.next.next;
+				list.next = list.next.next
 				break
 			}
 			list = list.next

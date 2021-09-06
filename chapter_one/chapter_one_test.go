@@ -1,6 +1,9 @@
 package chapter_one
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestQuestionOne(t *testing.T) {
 	t.Run("AAAA", func(t *testing.T) {
@@ -134,6 +137,138 @@ func TestQuestionSix(t *testing.T) {
 	for _, tt := range testCase {
 		got := QuestionSix(tt.in)
 		if got != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+	}
+}
+
+func TestQuestionSeven(t *testing.T) {
+	var testCase = []struct {
+		in   [][]int
+		want [][]int
+	}{
+		{
+			[][]int{
+				{1, 2, 3},
+				{1, 2, 3},
+				{1, 2, 3},
+			},
+			[][]int{
+				{1, 1, 1},
+				{2, 2, 2},
+				{3, 3, 3},
+			},
+		},
+		{
+			[][]int{
+				{1, 1, 1},
+				{2, 2, 2},
+				{3, 3, 3},
+			},
+			[][]int{
+				{3, 2, 1},
+				{3, 2, 1},
+				{3, 2, 1},
+			},
+		},
+		{
+			[][]int{
+				{1, 1, 1, 1},
+				{2, 2, 2, 2},
+				{3, 3, 3, 3},
+				{4, 4, 4, 4},
+			},
+			[][]int{
+				{4, 3, 2, 1},
+				{4, 3, 2, 1},
+				{4, 3, 2, 1},
+				{4, 3, 2, 1},
+			},
+		},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionSeven(tt.in)
+		if !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+	}
+}
+
+func TestQuestionEight(t *testing.T) {
+	var testCase = []struct {
+		in   [][]int
+		want [][]int
+	}{
+		{
+			[][]int{
+				{1, 2, 3},
+				{1, 2, 3},
+				{1, 2, 3},
+				{1, 2, 3},
+			},
+			[][]int{
+				{1, 2, 3},
+				{1, 2, 3},
+				{1, 2, 3},
+				{1, 2, 3},
+			},
+		},
+		{
+			[][]int{
+				{1, 1, 1},
+				{0, 2, 2},
+				{3, 3, 3},
+				{4, 4, 4},
+			},
+			[][]int{
+				{0, 1, 1},
+				{0, 0, 0},
+				{0, 3, 3},
+				{0, 4, 4},
+			},
+		},
+		{
+			[][]int{
+				{1, 1, 1, 1},
+				{2, 2, 2, 2},
+				{3, 3, 0, 3},
+				{4, 4, 4, 4},
+				{5, 5, 5, 5},
+			},
+			[][]int{
+				{1, 1, 0, 1},
+				{2, 2, 0, 2},
+				{0, 0, 0, 0},
+				{4, 4, 0, 4},
+				{5, 5, 0, 5},
+			},
+		},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionEight(tt.in)
+		if !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+	}
+}
+
+func TestQuestionNine(t *testing.T) {
+	var testCase = []struct {
+		in   string
+		in2  string
+		want bool
+	}{
+		{"waterbottle", "erbottlewat", true},
+		{"waterbottle", "erbottlemate", false},
+		{"hellomynameis", "nameishellomy", true},
+		{"tabletennis", "pingpong", false},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionNine(tt.in, tt.in2)
+		if !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("got: %v; want: %v", got, tt.want)
 		}
 	}
