@@ -65,3 +65,52 @@ func QuestionOne(l List) List {
 	}
 	return l
 }
+
+func QuestionTwo(l List, k int) int {
+	length := 0
+	n := l.head
+	kth := l.head
+	for n.next != nil {
+		length++
+		if length >= k {
+			kth = kth.next
+		}
+		n = n.next
+	}
+	return kth.data
+}
+
+func QuestionThree(l List, v int) List {
+	n := l.head
+	for n.next != nil {
+		if n.next.data == v {
+			if n.next.next != nil {
+				n.next = n.next.next
+				return l
+			}
+			n.next = nil
+			return l
+		}
+		n = n.next
+	}
+	return l
+}
+
+func QuestionFour(l List, v int) (List, List) {
+	l1 := List{}
+	l2 := List{}
+	n := l.head
+	for n.next != nil {
+		if n.data >= v {
+			l2.AppendToTail(n.data)
+		} else {
+			l1.AppendToTail(n.data)
+		}
+		n = n.next
+	}
+	return l1, l2
+}
+
+func QuestionFive(l1, l2 List) List {
+	return l1
+}
