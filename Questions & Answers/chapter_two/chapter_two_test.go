@@ -108,6 +108,27 @@ func TestQuestionFive(t *testing.T) {
 	}
 }
 
+func TestQuestionSix(t *testing.T) {
+	input1 := createLinkedList(7, 1, 7)
+	input2 := createLinkedList(5, 9, 2)
+
+	var testCase = []struct {
+		in   List
+		want bool
+	}{
+		{input1, true},
+		{input2, false},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionSix(tt.in)
+		if got != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+
+	}
+}
+
 func createLinkedList(vals ...int) List {
 	list := List{}
 	for _, v := range vals {

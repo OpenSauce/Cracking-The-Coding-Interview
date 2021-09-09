@@ -7,7 +7,7 @@ import (
 
 func TestQuestionOne(t *testing.T) {
 	t.Run("AAAA", func(t *testing.T) {
-		got := QuestionOne("AAAAAA")
+		got := QuestionOne("aaaaa")
 		want := false
 
 		if got != want {
@@ -16,7 +16,7 @@ func TestQuestionOne(t *testing.T) {
 	})
 
 	t.Run("ABCDEF", func(t *testing.T) {
-		got := QuestionOne("ABCDEFGH")
+		got := QuestionOne("abcdefgh")
 		want := true
 
 		if got != want {

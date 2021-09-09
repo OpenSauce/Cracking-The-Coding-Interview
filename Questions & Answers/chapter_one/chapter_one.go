@@ -6,14 +6,26 @@ import (
 	"strings"
 )
 
-func QuestionOne(word string) bool {
-	var m = make(map[rune]int)
+// func QuestionOne(word string) bool {
+// 	var m = make(map[rune]int)
 
+// 	for _, char := range word {
+// 		if m[char] == 1 {
+// 			return false
+// 		}
+// 		m[char] = 1
+// 	}
+// 	return true
+// }
+
+func QuestionOne(word string) bool {
+	checker := 0
 	for _, char := range word {
-		if m[char] == 1 {
+		val := char - 'a'
+		if (checker & (1 << val)) > 0 {
 			return false
 		}
-		m[char] = 1
+		checker |= (1 << val)
 	}
 	return true
 }
@@ -84,7 +96,6 @@ func QuestionSix(input string) string {
 			}
 
 			val := j - i
-
 			if j+1 == len(input) {
 				if char != input[j] {
 					res += fmt.Sprintf("%c%d", char, val)

@@ -1,6 +1,10 @@
 package chapter_two
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 type Node struct {
 	next *Node
@@ -112,5 +116,33 @@ func QuestionFour(l List, v int) (List, List) {
 }
 
 func QuestionFive(l1, l2 List) List {
-	return l1
+	n := l1.head
+	m := l2.head
+	res := List{}
+	remainder := 0
+	for n != nil && m != nil {
+		val := n.data + m.data + remainder
+		if val >= 10 {
+			res.AppendToTail(val - 10)
+			remainder = val / 10
+		} else {
+			res.AppendToTail(val)
+			remainder = 0
+		}
+		n = n.next
+		m = m.next
+	}
+	return res
+}
+
+func QuestionSix(l List) bool {
+	n := l.head
+	var st1, st2 string
+	for n != nil {
+		st1 += strconv.Itoa(n.data)
+		temp := st2
+		st2 = strconv.Itoa(n.data) + temp
+		n = n.next
+	}
+	return strings.Compare(st1, st2) == 0
 }
