@@ -115,7 +115,7 @@ func QuestionSix(input string) string {
 	return res
 }
 
-func QuestionSeven(in [][]int) [][]int {
+func QuestionSevenOld(in [][]int) [][]int {
 	res := make([][]int, len(in))
 	for i := range res {
 		res[i] = make([]int, len(in))
@@ -131,23 +131,42 @@ func QuestionSeven(in [][]int) [][]int {
 	return res
 }
 
-func QuestionEight(in [][]int) [][]int {
-	res := in
+func QuestionSeven(in [][]int) [][]int {
+	if len(in) == 0 || len(in) != len(in[0]) {
+		return nil
+	}
+	n := len(in)
+	for layer := 0; layer < n/2; layer++ {
+		first := layer
+		last := n - 1 - layer
+		for i := first; i < last; i++ {
+			offset := i - first
+			top := in[first][i]
 
+			in[first][i] = in[last-offset][first]
+			in[last-offset][first] = in[last][last-offset]
+			in[last][last-offset] = in[i][last]
+			in[i][last] = top
+		}
+	}
+	return in
+}
+
+func QuestionEight(in [][]int) [][]int {
 	for i := 0; i < len(in); i++ {
 		for j := 0; j < len(in[i]); j++ {
 			if in[i][j] == 0 {
 				for k := 0; k < len(in); k++ {
-					res[k][j] = 0
+					in[k][j] = 0
 				}
 				for k := 0; k < len(in[i]); k++ {
-					res[i][k] = 0
+					in[i][k] = 0
 				}
-				return res
+				return in
 			}
 		}
 	}
-	return res
+	return in
 }
 
 func QuestionNine(in, in2 string) bool {
