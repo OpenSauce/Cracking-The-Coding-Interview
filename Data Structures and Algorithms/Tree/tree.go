@@ -20,4 +20,3 @@ func NewNode(data interface{}) *TreeNode {
 
 func main() {
 }
-s

@@ -146,3 +146,7 @@ func QuestionSix(l List) bool {
 	}
 	return strings.Compare(st1, st2) == 0
 }
+
+func QuestionSeven(l1, l2 List) int {
+	return 0
+}
