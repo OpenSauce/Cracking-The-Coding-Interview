@@ -55,15 +55,13 @@ func (l *List) String() string {
 func QuestionOne(l List) List {
 	previousValues := make(map[int]struct{})
 	n := l.head
-	for n.next != nil {
-		previousValues[n.data] = struct{}{}
-		if _, ok := previousValues[n.next.data]; ok {
-			if n.next.next != nil {
-				n.next = n.next.next
-				continue
-			}
-			n.next = nil
-			return l
+	var previous *Node
+	for n != nil {
+		if _, ok := previousValues[n.data]; ok {
+			previous.next = n.next
+		} else {
+			previousValues[n.data] = struct{}{}
+			previous = n
 		}
 		n = n.next
 	}
@@ -148,5 +146,18 @@ func QuestionSix(l List) bool {
 }
 
 func QuestionSeven(l1, l2 List) int {
+	return 0
+}
+
+func QuestionEight(l List) int {
+	n := l.head
+	alreadySeen := make(map[int]struct{})
+	for n != nil {
+		if _, ok := alreadySeen[n.data]; ok {
+			return n.data
+		}
+		alreadySeen[n.data] = struct{}{}
+		n = n.next
+	}
 	return 0
 }

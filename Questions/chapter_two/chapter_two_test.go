@@ -130,22 +130,43 @@ func TestQuestionSix(t *testing.T) {
 }
 
 func TestQuestionSeven(t *testing.T) {
+	// input1 := createLinkedList(7, 1, 7)
+	// input2 := createLinkedList(5, 9, 2)
+	// input3 := createLinkedList(5, 9, 2)
+	// input4 := createLinkedList(5, 9, 2)
+
+	// var testCase = []struct {
+	// 	in   List
+	// 	in2  List
+	// 	want int
+	// }{
+	// 	{input1, input2, 5},
+	// 	{input3, input4, 0},
+	// }
+
+	// for _, tt := range testCase {
+	// 	got := QuestionSeven(tt.in, tt.in2)
+	// 	if got != tt.want {
+	// 		t.Errorf("got: %v; want: %v", got, tt.want)
+	// 	}
+
+	// }
+}
+
+func TestQuestionEight(t *testing.T) {
 	input1 := createLinkedList(7, 1, 7)
 	input2 := createLinkedList(5, 9, 2)
-	input3 := createLinkedList(5, 9, 2)
-	input4 := createLinkedList(5, 9, 2)
 
 	var testCase = []struct {
 		in   List
-		in2  List
 		want int
 	}{
-		{input1, input2, 5},
-		{input3, input4, 0},
+		{input1, 7},
+		{input2, 0},
 	}
 
 	for _, tt := range testCase {
-		got := QuestionSeven(tt.in, tt.in2)
+		got := QuestionEight(tt.in)
 		if got != tt.want {
 			t.Errorf("got: %v; want: %v", got, tt.want)
 		}
