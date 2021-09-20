@@ -1,6 +1,8 @@
 package chapter_three
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Stack struct {
 	top      *StackNode
@@ -44,22 +46,32 @@ func setPop() (interface{}, error) {
 	data, err := s.pop()
 	if err != nil {
 		g_stack.top = s.top.next
-		s := g_stack.top.data.(Stack) - 1
-		return g_stack.top.data.(*Stack).pop()
+		s := g_stack.top.data.(Stack)
+		s.capacity--
+		g_stack.top.data = s
+		return s.pop()
 	}
 	s.capacity--
+	g_stack.top.data = s
 	return data, fmt.Errorf("empty Stack")
 }
 
 func setPush(in int) {
-	s := g_stack.top.data.(Stack)
-	if s.capacity == 5 {
-		newStack := Stack{top: &StackNode{data: in, next: nil}, capacity: 1}
-		s.top = &newStack
-		return
+	if g_stack.isEmpty() {
+		newStack := Stack{capacity: 0}
+		g_stack.push(newStack)
 	}
 
-	s.top = &t
+	s := g_stack.top.data.(Stack)
+	if s.capacity == 5 {
+		newStack := Stack{capacity: 1}
+		newStack.push(in)
+		g_stack.push(newStack)
+		return
+	}
+	s.capacity++
+	s.push(in)
+	g_stack.top.data = s
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 package chapter_three
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -13,20 +14,14 @@ func TestQuestionTwo(t *testing.T) {
 }
 
 func TestQuestionThree(t *testing.T) {
-	var testCase = []struct {
-		in   string
-		want string
-	}{
-		{"aaaabbbbcccddddeff", "a4b4c3d4e1f2"},
-		{"aaaabbbbcccddddef", "a4b4c3d4e1f1"},
-		{"aaaabbbbcccddddefgg", "a4b4c3d4e1f1g2"},
-		{"abcdefg", "a1b1c1d1e1f1g1"},
-	}
-
-	for _, tt := range testCase {
-		got := QuestionThree(tt.in)
-		if got != tt.want {
-			t.Errorf("got: %v; want: %v", got, tt.want)
-		}
-	}
+	setPush(1)
+	setPush(2)
+	setPush(3)
+	setPush(4)
+	setPush(5)
+	setPop()
+	setPush(1)
+	fmt.Printf("%+v\n", g_stack.top)
+	setPush(2)
+	fmt.Printf("%+v\n", g_stack.top)
 }
