@@ -76,6 +76,49 @@ func setPush(in int) {
 
 //----------------------------------------------------------------------------------------------------------------------------------
 
+type MyQueue struct {
+	StackOne Stack
+}
+
+func (q *MyQueue) Add(in interface{}) {
+	if q.StackOne.top == nil {
+		q.StackOne.push(in)
+		return
+	}
+
+	st := q.StackOne.top
+	var temp Stack
+	for st != nil {
+		temp.push(st.data)
+		st = st.next
+		q.StackOne.pop()
+	}
+	temp.push(in)
+
+	t := temp.top
+	for t != nil {
+		q.StackOne.push(t.data)
+		t = t.next
+	}
+}
+
+func (q *MyQueue) Remove() {
+	if q.StackOne.top == nil {
+		return
+	}
+
+	q.StackOne.pop()
+}
+
+func (q *MyQueue) Display() {
+	fmt.Println("----")
+	st := q.StackOne.top
+	for st != nil {
+		fmt.Println(st.data)
+		st = st.next
+	}
+}
+
 func QuestionOne(word string) {
 	/*
 		Use the modulus and divide by the number of stacks. Track the head of each stack.
