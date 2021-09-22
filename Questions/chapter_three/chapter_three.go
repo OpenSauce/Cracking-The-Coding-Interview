@@ -41,6 +41,31 @@ func (s *Stack) isEmpty() bool {
 	return s.top == nil
 }
 
+func (s *Stack) equals(s2 Stack) bool {
+	st := s.top
+	st2 := s2.top
+	for st != nil || st2 != nil {
+		if st == nil || st2 == nil {
+			return false
+		}
+		if st.data != st2.data {
+			return false
+		}
+		st = st.next
+		st2 = st2.next
+	}
+	return true
+}
+
+func (s *Stack) Display() {
+	fmt.Println("----")
+	st := s.top
+	for st != nil {
+		fmt.Println(st.data)
+		st = st.next
+	}
+}
+
 func setPop() (interface{}, error) {
 	s := g_stack.top.data.(Stack)
 	data, err := s.pop()
@@ -132,5 +157,34 @@ func QuestionTwo(word string) {
 }
 
 func SortStack(s Stack) Stack {
-	return s
+	count := 0
+	st := s.top
+	for st != nil {
+		count++
+		st = st.next
+	}
+
+	var temp Stack
+	stack := s
+	for i := 0; i < count; i++ {
+		max := 0
+		st = stack.top
+		for st != nil {
+			if st.data.(int) > max {
+				max = st.data.(int)
+			}
+			st = st.next
+		}
+		if max > 0 {
+			temp.push(max)
+		}
+		st = stack.top
+		for st != nil {
+			if st.data.(int) == max {
+				st.data = 0
+			}
+			st = st.next
+		}
+	}
+	return temp
 }

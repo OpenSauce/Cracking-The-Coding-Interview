@@ -40,3 +40,44 @@ func TestQuestionFour(t *testing.T) {
 	q.Add(8)
 	q.Display()
 }
+
+func TestQuestionFive(t *testing.T) {
+	var s1 Stack
+	s1.push(2)
+	s1.push(1)
+	s1.push(4)
+	s1.push(8)
+	s1.push(9)
+	s1.push(6)
+	s1.push(5)
+	s1.push(7)
+	s1.push(3)
+	var s2 Stack
+	s2.push(9)
+	s2.push(8)
+	s2.push(7)
+	s2.push(6)
+	s2.push(5)
+	s2.push(4)
+	s2.push(3)
+	s2.push(2)
+	s2.push(1)
+
+	var testCase = []struct {
+		in   Stack
+		want bool
+	}{
+		{s1, true},
+	}
+
+	for _, tt := range testCase {
+		val := SortStack(tt.in)
+		val.Display()
+		s2.Display()
+		got := val.equals(s2)
+		if got != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+
+	}
+}
