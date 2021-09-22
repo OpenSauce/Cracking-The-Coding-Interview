@@ -131,6 +131,6 @@ func QuestionTwo(word string) {
 	*/
 }
 
-func QuestionThree(word string) string {
-	return ""
+func SortStack(s Stack) Stack {
+	return s
 }
