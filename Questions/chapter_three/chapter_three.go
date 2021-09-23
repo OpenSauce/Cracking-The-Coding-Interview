@@ -144,6 +144,59 @@ func (q *MyQueue) Display() {
 	}
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------
+
+type Node struct {
+	next *Node
+	data interface{}
+}
+
+type Dog struct{}
+type Cat struct{}
+
+type List struct {
+	head *Node
+}
+
+func (l *List) Enqueue(val interface{}) {
+	node := &Node{
+		next: nil,
+		data: val,
+	}
+
+	if l.head == nil {
+		l.head = node
+		return
+	}
+
+	list := l.head
+	for list.next != nil {
+		list = list.next
+	}
+	list.next = node
+}
+
+func (l *List) Display() {
+	list := l.head
+	for list != nil {
+		fmt.Printf("%+v -> ", list.data)
+		list = list.next
+	}
+	fmt.Println()
+}
+
+func (l *List) String() string {
+	var res string
+	list := l.head
+	for list != nil {
+		res += fmt.Sprintf("%+v", list.data)
+		list = list.next
+	}
+	return res
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------
+
 func QuestionOne(word string) {
 	/*
 		Use the modulus and divide by the number of stacks. Track the head of each stack.
