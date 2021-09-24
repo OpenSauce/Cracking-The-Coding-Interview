@@ -176,10 +176,46 @@ func (l *List) Enqueue(val interface{}) {
 	list.next = node
 }
 
+func (l *List) Dequeue() interface{} {
+	list := l.head
+	l.head = list.next
+	return list.data
+}
+
+func (l *List) DequeueType(typeV string) interface{} {
+	list := l.head
+	var prev *Node
+	for list != nil {
+		temp := list
+		switch v := list.data.(type) {
+		case Dog:
+			if typeV != "dog" {
+				break
+			}
+			prev.next = list.next
+			return v
+		case Cat:
+			if typeV != "cat" {
+				break
+			}
+			prev.next = list.next
+			return v
+		}
+		list = list.next
+		prev = temp
+	}
+	return nil
+}
+
 func (l *List) Display() {
 	list := l.head
 	for list != nil {
-		fmt.Printf("%+v -> ", list.data)
+		switch list.data.(type) {
+		case Dog:
+			fmt.Printf("%+v -> ", "Dog")
+		case Cat:
+			fmt.Printf("%+v -> ", "Cat")
+		}
 		list = list.next
 	}
 	fmt.Println()

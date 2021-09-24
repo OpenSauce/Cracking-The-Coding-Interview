@@ -81,3 +81,18 @@ func TestQuestionFive(t *testing.T) {
 
 	}
 }
+
+func TestQuestionSix(t *testing.T) {
+	myList := List{}
+	myList.Enqueue(Dog{})
+	myList.Enqueue(Cat{})
+	myList.Enqueue(Dog{})
+	myList.Enqueue(Cat{})
+	myList.Display()
+	myList.DequeueType("cat")
+	myList.Display()
+	myList.Dequeue()
+	myList.Display()
+	myList.Enqueue(Dog{})
+	myList.Enqueue(Cat{})
+}
