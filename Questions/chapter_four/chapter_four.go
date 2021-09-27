@@ -25,10 +25,28 @@ func search(root *Node) {
 	}
 	fmt.Println(root.Data)
 	root.visited = true
-	if root.Left != nil && root.Left.visited == false {
+	if root.Left != nil && !root.Left.visited {
 		search(root.Left)
 	}
-	if root.Right != nil && root.Right.visited == false {
+	if root.Right != nil && !root.Right.visited {
 		search(root.Right)
 	}
+}
+
+func QuestionTwo(input []int) *Tree {
+	myTree := &Tree{}
+	myTree.Root = InsertNode(input, 0, len(input)-1)
+	return myTree
+}
+
+func InsertNode(input []int, start, end int) *Node {
+	if end < start {
+		return nil
+	}
+
+	mid := (start + end) / 2
+	n := &Node{Data: input[mid]}
+	n.Left = InsertNode(input, start, mid-1)
+	n.Right = InsertNode(input, mid+1, end)
+	return n
 }

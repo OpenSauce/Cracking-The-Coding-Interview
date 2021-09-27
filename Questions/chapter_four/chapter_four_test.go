@@ -32,3 +32,11 @@ func TestQuestionOne(t *testing.T) {
 
 	}
 }
+
+func TestQuestionTwo(t *testing.T) {
+	input := []int{1, 2, 4, 5, 6, 7, 8}
+
+	bst := QuestionTwo(input)
+
+	search(bst.Root)
+}
