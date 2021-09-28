@@ -40,3 +40,17 @@ func TestQuestionTwo(t *testing.T) {
 
 	search(bst.Root)
 }
+
+func TestQuestionThree(t *testing.T) {
+	s1 := &Node{}
+	s2 := &Node{}
+	s3 := &Node{Left: s1}
+	s4 := &Node{}
+	s5 := &Node{Left: s4}
+	s6 := &Node{Left: s3}
+	s7 := &Node{Left: s5, Right: s2}
+	s8 := &Node{Left: s7, Right: s6}
+	t1 := &Tree{Root: s8}
+
+	QuestionThree(t1)
+}

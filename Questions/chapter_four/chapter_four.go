@@ -5,6 +5,7 @@ import "fmt"
 type Node struct {
 	Data    int
 	visited bool
+	marked  bool
 	Right   *Node
 	Left    *Node
 }
@@ -12,6 +13,77 @@ type Node struct {
 type Tree struct {
 	Root *Node
 }
+
+//----------------------------------
+
+type ListNode struct {
+	prev *ListNode
+	next *ListNode
+	key  *Node
+}
+
+type List struct {
+	head *ListNode
+	tail *ListNode
+}
+
+func (L *List) Insert(key *Node) {
+	list := &ListNode{
+		next: L.head,
+		key:  key,
+	}
+	if L.head != nil {
+		L.head.prev = list
+	}
+	L.head = list
+
+	l := L.head
+	for l.next != nil {
+		l = l.next
+	}
+	L.tail = l
+}
+
+func (l *List) Display() {
+	list := l.head
+	for list != nil {
+		fmt.Printf("%+v ->", list.key)
+		list = list.next
+	}
+	fmt.Println()
+}
+
+//----------------------------------
+
+func (l *List) Enqueue(val *Node) {
+	node := &ListNode{
+		next: nil,
+		key:  val,
+	}
+
+	if l.head == nil {
+		l.head = node
+		return
+	}
+
+	list := l.head
+	for list.next != nil {
+		list = list.next
+	}
+	list.next = node
+}
+
+func (l *List) Dequeue() *Node {
+	list := l.head
+	l.head = list.next
+	return list.key
+}
+
+func (l *List) isEmpty() bool {
+	return l.head == nil
+}
+
+//----------------------------------
 
 func QuestionOne(t1 *Tree, n1, n2 *Node) bool {
 	search(t1.Root)
@@ -49,4 +121,35 @@ func InsertNode(input []int, start, end int) *Node {
 	n.Left = InsertNode(input, start, mid-1)
 	n.Right = InsertNode(input, mid+1, end)
 	return n
+}
+
+func QuestionThree(t1 *Tree) {
+	BST(t1.Root)
+}
+
+func BST(root *Node) {
+	queue := List{}
+	root.marked = true
+	queue.Enqueue(root)
+	current := List{}
+	if root != nil {
+		current.Insert(root)
+	}
+
+	for !queue.isEmpty() {
+		current.Display()
+		r := queue.Dequeue()
+		r.visited = true
+		current = List{}
+		if r.Left != nil && !r.Left.marked {
+			r.Left.marked = true
+			queue.Enqueue(r.Left)
+			current.Insert(r.Left)
+		}
+		if r.Right != nil && !r.Right.marked {
+			r.Right.marked = true
+			queue.Enqueue(r.Right)
+			current.Insert(r.Right)
+		}
+	}
 }
