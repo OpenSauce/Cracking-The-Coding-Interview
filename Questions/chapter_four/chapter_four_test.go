@@ -54,3 +54,40 @@ func TestQuestionThree(t *testing.T) {
 
 	QuestionThree(t1)
 }
+
+func TestQuestionFour(t *testing.T) {
+	s1 := &Node{}
+	s2 := &Node{}
+	s3 := &Node{Left: s1}
+	s4 := &Node{}
+	s5 := &Node{Left: s4}
+	s6 := &Node{Left: s3}
+	s7 := &Node{Left: s5, Right: s2}
+	s8 := &Node{Left: s7, Right: s6}
+	t1 := &Tree{Root: s8}
+
+	n2 := &Node{}
+	n3 := &Node{}
+	n4 := &Node{}
+	n5 := &Node{}
+	n6 := &Node{Left: n3, Right: n2}
+	n7 := &Node{Left: n5, Right: n4}
+	n8 := &Node{Left: n7, Right: n6}
+	t2 := &Tree{Root: n8}
+
+	var testCase = []struct {
+		in   *Node
+		want bool
+	}{
+		{t1.Root, false},
+		{t2.Root, true},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionFour(tt.in)
+		if got != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+
+	}
+}

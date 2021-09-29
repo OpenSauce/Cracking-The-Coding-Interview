@@ -153,3 +153,10 @@ func BST(root *Node) {
 		}
 	}
 }
+
+func QuestionFour(root *Node) bool {
+	if root != nil {
+		return true
+	}
+	return false
+}
