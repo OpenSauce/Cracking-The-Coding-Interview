@@ -1,6 +1,9 @@
 package chapter_four
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Node struct {
 	Data    int
@@ -155,8 +158,28 @@ func BST(root *Node) {
 }
 
 func QuestionFour(root *Node) bool {
-	if root != nil {
-		return true
+	return checkHeight(root) != math.MinInt
+}
+
+func checkHeight(root *Node) int {
+	if root == nil {
+		return -1
 	}
-	return false
+
+	leftHeight := checkHeight(root.Left)
+	if leftHeight == math.MinInt {
+		return math.MinInt
+	}
+
+	rightHeight := checkHeight(root.Right)
+	if rightHeight == math.MinInt {
+		return math.MinInt
+	}
+
+	heightDiff := leftHeight - rightHeight
+	if math.Abs(float64(heightDiff)) > 1 {
+		return math.MinInt
+	} else {
+		return int(math.Max(float64(leftHeight), float64(rightHeight)+1))
+	}
 }
