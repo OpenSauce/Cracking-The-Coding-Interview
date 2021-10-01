@@ -183,3 +183,25 @@ func checkHeight(root *Node) int {
 		return int(math.Max(float64(leftHeight), float64(rightHeight)+1))
 	}
 }
+
+func QuestionFive(root *Node) bool {
+	return checkBinarySearch(root) != false
+}
+
+func checkBinarySearch(root *Node) bool {
+	if root == nil {
+		return true
+	}
+
+	leftHeight := checkBinarySearch(root.Left)
+	if leftHeight == false {
+		return false
+	}
+
+	rightHeight := checkBinarySearch(root.Right)
+	if rightHeight == false {
+		return false
+	}
+
+	return root.Left.Data < root.Right.Data
+}
