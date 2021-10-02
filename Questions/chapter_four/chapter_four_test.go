@@ -57,8 +57,8 @@ func TestQuestionThree(t *testing.T) {
 
 func TestQuestionFour(t *testing.T) {
 	s1 := &Node{}
-	s2 := &Node{}
-	s3 := &Node{Left: s1}
+	s2 := &Node{Left: s1}
+	s3 := &Node{Left: s2}
 	s4 := &Node{}
 	s5 := &Node{Left: s4}
 	s6 := &Node{Left: s3}

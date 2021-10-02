@@ -132,12 +132,12 @@ func QuestionThree(t1 *Tree) {
 
 func BST(root *Node) {
 	queue := List{}
-	root.marked = true
 	queue.Enqueue(root)
 	current := List{}
 	if root != nil {
 		current.Insert(root)
 	}
+	root.marked = true
 
 	for !queue.isEmpty() {
 		current.Display()
@@ -177,7 +177,7 @@ func checkHeight(root *Node) int {
 	}
 
 	heightDiff := leftHeight - rightHeight
-	if math.Abs(float64(heightDiff)) > 1 {
+	if int(math.Abs(float64(heightDiff))) > 1 {
 		return math.MinInt
 	} else {
 		return int(math.Max(float64(leftHeight), float64(rightHeight)+1))
@@ -193,30 +193,16 @@ func checkBinarySearch(root *Node) bool {
 		return true
 	}
 
-	leftNodeBST := checkBinarySearch(root.Left)
-	if !leftNodeBST {
+	if !checkBinarySearch(root.Left) {
+		return false
+	}
+	if !checkBinarySearch(root.Right) {
 		return false
 	}
 
-	rightNodeBST := checkBinarySearch(root.Right)
-	if !rightNodeBST {
-		return false
-	}
+	return (root.Left == nil || root.Left.Data < root.Data) && (root.Right == nil || root.Right.Data > root.Data)
+}
 
-	var b1, b2 bool
-	if root.Left != nil {
-		b1 = root.Left.Data < root.Data
-	} else {
-		b1 = true
-	}
-
-	if root.Right != nil {
-		b2 = root.Right.Data > root.Data
-	} else {
-		b2 = true
-	}
-
-	fmt.Printf("%v %v", b1, b2)
-
-	return b1 && b2
+func QuestionSix(root *Node) *Node {
+	return nil
 }
