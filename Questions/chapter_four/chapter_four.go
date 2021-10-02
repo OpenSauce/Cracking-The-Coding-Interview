@@ -185,7 +185,7 @@ func checkHeight(root *Node) int {
 }
 
 func QuestionFive(root *Node) bool {
-	return checkBinarySearch(root) != false
+	return checkBinarySearch(root)
 }
 
 func checkBinarySearch(root *Node) bool {
@@ -193,15 +193,30 @@ func checkBinarySearch(root *Node) bool {
 		return true
 	}
 
-	leftHeight := checkBinarySearch(root.Left)
-	if leftHeight == false {
+	leftNodeBST := checkBinarySearch(root.Left)
+	if !leftNodeBST {
 		return false
 	}
 
-	rightHeight := checkBinarySearch(root.Right)
-	if rightHeight == false {
+	rightNodeBST := checkBinarySearch(root.Right)
+	if !rightNodeBST {
 		return false
 	}
 
-	return root.Left.Data < root.Right.Data
+	var b1, b2 bool
+	if root.Left != nil {
+		b1 = root.Left.Data < root.Data
+	} else {
+		b1 = true
+	}
+
+	if root.Right != nil {
+		b2 = root.Right.Data > root.Data
+	} else {
+		b2 = true
+	}
+
+	fmt.Printf("%v %v", b1, b2)
+
+	return b1 && b2
 }
