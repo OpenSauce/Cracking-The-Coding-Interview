@@ -6,11 +6,12 @@ import (
 )
 
 type Node struct {
-	Data    int
-	visited bool
-	marked  bool
-	Right   *Node
-	Left    *Node
+	Data          int
+	visited       bool
+	marked        bool
+	InorderParent *Node
+	Right         *Node
+	Left          *Node
 }
 
 type Tree struct {
@@ -203,6 +204,34 @@ func checkBinarySearch(root *Node) bool {
 	return (root.Left == nil || root.Left.Data < root.Data) && (root.Right == nil || root.Right.Data > root.Data)
 }
 
-func QuestionSix(root *Node) *Node {
-	return nil
+var previousNode *Node
+
+func QuestionSix(n *Node) *Node {
+	if n == nil {
+		return nil
+	}
+
+	if n.Right != nil {
+		return leftMostChild(n.Right)
+	} else {
+		q := n
+		x := q.InorderParent
+
+		for x != nil && x.Left != q {
+			q = x
+			x = x.InorderParent
+		}
+		return x
+	}
+}
+
+func leftMostChild(n *Node) *Node {
+	if n == nil {
+		return nil
+	}
+
+	for n.Left != nil {
+		n = n.Left
+	}
+	return n
 }

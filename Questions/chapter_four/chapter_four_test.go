@@ -124,3 +124,30 @@ func TestQuestionFive(t *testing.T) {
 
 	}
 }
+
+func TestQuestionSix(t *testing.T) {
+	s1 := &Node{Data: 1}
+	s2 := &Node{Data: 12}
+	s3 := &Node{Left: s1, Data: 3}
+	s4 := &Node{Data: 4}
+	s5 := &Node{Left: s4, Data: 5}
+	s6 := &Node{Left: s3, Data: 6}
+	s7 := &Node{Left: s5, Right: s2, Data: 7}
+	s8 := &Node{Left: s7, Right: s6, Data: 8}
+	t1 := &Tree{Root: s8}
+
+	var testCase = []struct {
+		in   *Node
+		want int
+	}{
+		{t1.Root, 1},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionSix(tt.in)
+		if got.Data != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+
+	}
+}
