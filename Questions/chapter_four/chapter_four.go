@@ -235,3 +235,7 @@ func leftMostChild(n *Node) *Node {
 	}
 	return n
 }
+
+func QuestionSeven() {
+
+}
