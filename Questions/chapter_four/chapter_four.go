@@ -236,6 +236,105 @@ func leftMostChild(n *Node) *Node {
 	return n
 }
 
+// ------------------------------
+
+type Stack struct {
+	top      *StackNode
+	capacity int
+}
+
+type StackNode struct {
+	data interface{}
+	next *StackNode
+}
+
+func (s *Stack) pop() (interface{}, error) {
+	if s.top != nil {
+		data := s.top.data
+		s.top = s.top.next
+		return data, nil
+	}
+	return 0, fmt.Errorf("empty Stack")
+}
+
+func (s *Stack) push(in interface{}) {
+	t := StackNode{data: in, next: s.top}
+	s.top = &t
+}
+
+func (s *Stack) peek() (interface{}, error) {
+	if s.top != nil {
+		return s.top.data, nil
+	}
+	return 0, fmt.Errorf("empty Stack")
+}
+
+func (s *Stack) isEmpty() bool {
+	return s.top == nil
+}
+
+// ------------------------------
+
+type Graph struct {
+	nodes   []Project
+	hashMap map[string]Project
+}
+
+func (g *Graph) addEdge(startname, endName string) {
+	start := g.getOrCreateNode(startname)
+	end := g.getOrCreateNode(endName)
+	start.addNeighbour(end)
+}
+
+func (g *Graph) getOrCreateNode(name string) Project {
+	_, ok := g.hashMap[name]
+	if !ok {
+		node := Project{name: name, hashMap: make(map[string]Project)}
+		g.nodes = append(g.nodes, node)
+		g.hashMap[name] = node
+	}
+
+	return g.hashMap[name]
+}
+
+func buildGraph(projects []string, dependencies [][]string) Graph {
+	graph := Graph{hashMap: make(map[string]Project)}
+	for _, dependency := range dependencies {
+		first := dependency[0]
+		second := dependency[1]
+		graph.addEdge(first, second)
+	}
+
+	return graph
+}
+
+type Project struct {
+	children []Project
+	hashMap  map[string]Project
+	name     string
+}
+
+func (p *Project) addNeighbour(node Project) {
+	_, ok := p.hashMap[node.name]
+	if !ok {
+		p.children = append(p.children, node)
+		p.hashMap[node.name] = node
+	}
+}
+
+func (s *Stack) findBuildOrder(projects []string, dependencies [][]string) string {
+	graph := buildGraph(projects, dependencies)
+	return orderProjects(graph.getNodes())
+}
+
+func (g *Graph) getNodes() string {
+	return ""
+}
+
+func orderProjects(nodes string) string {
+	return ""
+}
+
 func QuestionSeven() {
 
 }
