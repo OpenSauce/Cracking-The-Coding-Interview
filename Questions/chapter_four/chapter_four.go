@@ -314,6 +314,8 @@ type Project struct {
 	name     string
 }
 
+const ()
+
 func (p *Project) addNeighbour(node Project) {
 	_, ok := p.hashMap[node.name]
 	if !ok {
@@ -322,17 +324,25 @@ func (p *Project) addNeighbour(node Project) {
 	}
 }
 
-func (s *Stack) findBuildOrder(projects []string, dependencies [][]string) string {
+func findBuildOrder(projects []string, dependencies [][]string) *Stack {
 	graph := buildGraph(projects, dependencies)
 	return orderProjects(graph.getNodes())
 }
 
-func (g *Graph) getNodes() string {
-	return ""
+func (g *Graph) getNodes() []Project {
+	return g.nodes
 }
 
-func orderProjects(nodes string) string {
-	return ""
+func orderProjects(projects []Project) *Stack {
+	stack := &Stack{}
+	for _, project := range projects {
+		if project.getState() == Project.State.BLANK {
+			if !doDFS(project, stack) {
+				return nil
+			}
+		}
+	}
+	return stack
 }
 
 func QuestionSeven() {
