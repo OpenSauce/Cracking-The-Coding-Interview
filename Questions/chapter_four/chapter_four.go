@@ -312,9 +312,16 @@ type Project struct {
 	children []Project
 	hashMap  map[string]Project
 	name     string
+	State
 }
 
-const ()
+type State int
+
+const (
+	BLANK State = iota
+	PARTIAL
+	COMPLETE
+)
 
 func (p *Project) addNeighbour(node Project) {
 	_, ok := p.hashMap[node.name]
@@ -324,9 +331,12 @@ func (p *Project) addNeighbour(node Project) {
 	}
 }
 
-func findBuildOrder(projects []string, dependencies [][]string) *Stack {
-	graph := buildGraph(projects, dependencies)
-	return orderProjects(graph.getNodes())
+func (p *Project) getState() State {
+	return p.State
+}
+
+func (p *Project) setState(s State) {
+	p.State = s
 }
 
 func (g *Graph) getNodes() []Project {
@@ -336,7 +346,7 @@ func (g *Graph) getNodes() []Project {
 func orderProjects(projects []Project) *Stack {
 	stack := &Stack{}
 	for _, project := range projects {
-		if project.getState() == Project.State.BLANK {
+		if project.getState() == BLANK {
 			if !doDFS(project, stack) {
 				return nil
 			}
@@ -345,6 +355,25 @@ func orderProjects(projects []Project) *Stack {
 	return stack
 }
 
-func QuestionSeven() {
+func doDFS(project Project, stack *Stack) bool {
+	if project.getState() == PARTIAL {
+		return false
+	}
 
+	if project.getState() == BLANK {
+		project.setState(PARTIAL)
+		for _, child := range project.children {
+			if !doDFS(child, stack) {
+				return false
+			}
+		}
+		project.setState(COMPLETE)
+		stack.push(project)
+	}
+	return true
+}
+
+func QuestionSeven(projects []string, dependencies [][]string) *Stack {
+	graph := buildGraph(projects, dependencies)
+	return orderProjects(graph.getNodes())
 }
