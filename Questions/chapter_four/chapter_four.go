@@ -377,3 +377,7 @@ func QuestionSeven(projects []string, dependencies [][]string) *Stack {
 	graph := buildGraph(projects, dependencies)
 	return orderProjects(graph.getNodes())
 }
+
+func QuestionEight() {
+
+}

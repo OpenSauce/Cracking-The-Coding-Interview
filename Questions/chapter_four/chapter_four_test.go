@@ -153,5 +153,9 @@ func TestQuestionSix(t *testing.T) {
 }
 
 func TestQuestionSeven(t *testing.T) {
+	// todo Implement test for the project graph
+}
+
+func TestQuestionEight(t *testing.T) {
 
 }
