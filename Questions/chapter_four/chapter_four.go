@@ -378,6 +378,40 @@ func QuestionSeven(projects []string, dependencies [][]string) *Stack {
 	return orderProjects(graph.getNodes())
 }
 
-func QuestionEight() {
+func QuestionEight(root, p, q *Node) *Node {
+	if !covers(root, p) || !covers(root, q) {
+		return nil
+	}
+	return ancestorHelper(root, p, q)
+}
 
+func ancestorHelper(root, p, q *Node) *Node {
+	if root == nil || root == p || root == q {
+		return root
+	}
+
+	pIsOnLeft := covers(root.Left, p)
+	qIsOnLeft := covers(root.Right, q)
+
+	if pIsOnLeft != qIsOnLeft {
+		return root
+	}
+
+	var childSide *Node
+	if pIsOnLeft {
+		childSide = root.Left
+	} else {
+		childSide = root.Right
+	}
+	return ancestorHelper(childSide, p, q)
+}
+
+func covers(root, p *Node) bool {
+	if root == nil {
+		return false
+	}
+	if root == p {
+		return true
+	}
+	return covers(root.Left, p) || covers(root.Right, p)
 }
