@@ -1,6 +1,9 @@
 package chapter_four
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestQuestionOne(t *testing.T) {
 	s1 := &Node{}
@@ -169,14 +172,46 @@ func TestQuestionEight(t *testing.T) {
 
 	var testCase = []struct {
 		in   *Node
-		want int
+		want *Node
 	}{
-		{t1.Root, 1},
+		{t1.Root, s8},
 	}
 
 	for _, tt := range testCase {
-		got := QuestionSix(tt.in)
-		if got.Data != tt.want {
+		got := QuestionEight(tt.in, s7, s6)
+		if got != tt.want {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+
+	}
+}
+
+func TestQuestionNine(t *testing.T) {
+	// s2 := &Node{Data: 2}
+	// s3 := &Node{Data: 3}
+	// s4 := &Node{Data: 4}
+	// s5 := &Node{Data: 5}
+	s6 := &Node{Data: 6} //Left: s3, Right: s2, Data: 6}
+	s7 := &Node{Data: 7} //Left: s5, Right: s4, Data: 7}
+	s8 := &Node{Left: s7, Right: s6, Data: 8}
+	t1 := &Tree{Root: s8}
+
+	var testCase = []struct {
+		in   *Node
+		want [][]int
+	}{
+		{
+			t1.Root,
+			[][]int{
+				{8, 7, 6},
+				{8, 6, 7},
+			},
+		},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionNine(tt.in)
+		if !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("got: %v; want: %v", got, tt.want)
 		}
 

@@ -391,7 +391,7 @@ func ancestorHelper(root, p, q *Node) *Node {
 	}
 
 	pIsOnLeft := covers(root.Left, p)
-	qIsOnLeft := covers(root.Right, q)
+	qIsOnLeft := covers(root.Left, q)
 
 	if pIsOnLeft != qIsOnLeft {
 		return root
@@ -414,4 +414,31 @@ func covers(root, p *Node) bool {
 		return true
 	}
 	return covers(root.Left, p) || covers(root.Right, p)
+}
+
+func QuestionNine(root *Node) [][]int {
+	var res [][]int
+	val1 := []int{}
+	OrderOne(root, &val1)
+	val2 := []int{}
+	OrderTwo(root, &val2)
+	res = append(res, val1)
+	res = append(res, val2)
+	return res
+}
+
+func OrderOne(root *Node, vals *[]int) {
+	if root != nil {
+		*vals = append(*vals, root.Data)
+		OrderOne(root.Left, vals)
+		OrderOne(root.Right, vals)
+	}
+}
+
+func OrderTwo(root *Node, vals *[]int) {
+	if root != nil {
+		*vals = append(*vals, root.Data)
+		OrderOne(root.Right, vals)
+		OrderOne(root.Left, vals)
+	}
 }
