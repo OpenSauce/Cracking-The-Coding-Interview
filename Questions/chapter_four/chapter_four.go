@@ -442,3 +442,56 @@ func OrderTwo(root *Node, vals *[]int) {
 		OrderOne(root.Left, vals)
 	}
 }
+
+func QuestionTen(root1, root2 *Node) bool {
+	if root2 == nil {
+		return true
+	}
+	return FindNode(root1, root2)
+}
+
+func FindNode(root1, root2 *Node) bool {
+	if root1 == nil {
+		return false
+	} else if root1.Data == root2.Data && InOrder(root1, root2) {
+		return true
+	}
+	return FindNode(root1.Left, root2) || FindNode(root1.Right, root2)
+}
+
+func InOrder(root1, root2 *Node) bool {
+	if root1 == nil && root2 == nil {
+		return true
+	} else if root1 == nil || root2 == nil {
+		return false
+	} else if root1.Data != root2.Data {
+		return false
+	} else {
+		return InOrder(root1.Left, root2.Left) && InOrder(root1.Right, root2.Right)
+	}
+
+}
+
+/*
+func QuestionTen(root1, root2 *Node) bool {
+	var string1 string
+	var string2 string
+
+	getOrderString(root1, &string1)
+	getOrderString(root2, &string2)
+
+	fmt.Println(string1 + string2)
+
+	return strings.Contains(string1, string2)
+}
+
+func getOrderString(node *Node, sb *string) {
+	if node == nil {
+		*sb += "X"
+		return
+	}
+	*sb += strconv.Itoa(node.Data)
+	getOrderString(node.Left, sb)
+	getOrderString(node.Right, sb)
+}
+*/
