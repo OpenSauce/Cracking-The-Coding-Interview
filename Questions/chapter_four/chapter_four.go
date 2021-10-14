@@ -3,6 +3,8 @@ package chapter_four
 import (
 	"fmt"
 	"math"
+	"strconv"
+	"strings"
 )
 
 type Node struct {
@@ -447,7 +449,7 @@ func QuestionTen(root1, root2 *Node) bool {
 	if root2 == nil {
 		return true
 	}
-	return FindNode(root1, root2)
+	return FindNode(root1, root2) && isSubtree(root1, root2)
 }
 
 func FindNode(root1, root2 *Node) bool {
@@ -472,8 +474,7 @@ func InOrder(root1, root2 *Node) bool {
 
 }
 
-/*
-func QuestionTen(root1, root2 *Node) bool {
+func isSubtree(root1, root2 *Node) bool {
 	var string1 string
 	var string2 string
 
@@ -494,4 +495,3 @@ func getOrderString(node *Node, sb *string) {
 	getOrderString(node.Left, sb)
 	getOrderString(node.Right, sb)
 }
-*/

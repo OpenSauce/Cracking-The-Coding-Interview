@@ -13,6 +13,7 @@ type Node struct {
 
 type Tree struct {
 	root *Node
+	size int
 }
 
 func NewNode(data int) *Node {
@@ -61,6 +62,7 @@ func Insert(t *Tree, n *Node) {
 	} else {
 		y.right = n
 	}
+	t.size++
 }
 
 func Transplant(t *Tree, u *Node, v *Node) {
@@ -93,6 +95,7 @@ func Delete(t *Tree, z *Node) {
 		y.left = z.left
 		y.left.parent = y
 	}
+	t.size--
 }
 
 func Inorder(t *Tree, n *Node) {
