@@ -258,3 +258,38 @@ func TestQuestionTen(t *testing.T) {
 	}
 }
 
+func TestQuestionTwelve(t *testing.T) {
+	s2 := &Node{Data: 2}
+	s3 := &Node{Data: 3}
+	s4 := &Node{Data: 4}
+	s5 := &Node{Data: 5}
+	s6 := &Node{Left: s3, Right: s2, Data: 6}
+	s7 := &Node{Left: s5, Right: s4, Data: 7}
+	s8 := &Node{Left: s7, Right: s6, Data: 8}
+	t1 := &Tree{Root: s8}
+
+	var testCase = []struct {
+		in   *Node
+		in2  int
+		want int
+	}{
+		{
+			t1.Root,
+			8,
+			2,
+		},
+		{
+			t1.Root,
+			6,
+			1,
+		},
+	}
+
+	for _, tt := range testCase {
+		got := QuestionTwelve(tt.in, tt.in2)
+		if !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("got: %v; want: %v", got, tt.want)
+		}
+
+	}
+}

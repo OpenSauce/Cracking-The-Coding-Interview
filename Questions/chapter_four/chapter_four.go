@@ -495,3 +495,49 @@ func getOrderString(node *Node, sb *string) {
 	getOrderString(node.Left, sb)
 	getOrderString(node.Right, sb)
 }
+
+func QuestionTwelve(root *Node, targetSum int) int {
+	return countPathsWithSum(root, targetSum, 0, make(map[int]int))
+}
+
+func countPathsWithSum(node *Node, targetSum int, runningSum int, pathCount map[int]int) int {
+	if node == nil {
+		return 0
+	}
+
+	runningSum += node.Data
+	sum := runningSum - targetSum
+	var totalPaths int
+	val, ok := pathCount[sum]
+	if !ok {
+		totalPaths = 0
+	} else {
+		totalPaths = val
+	}
+
+	if runningSum == targetSum {
+		totalPaths++
+	}
+
+	incrementHashTable(pathCount, runningSum, 1)
+	totalPaths += countPathsWithSum(node.Left, targetSum, runningSum, pathCount)
+	totalPaths += countPathsWithSum(node.Right, targetSum, runningSum, pathCount)
+
+	return totalPaths
+}
+
+func incrementHashTable(pathCount map[int]int, key, inc int) {
+	var newCount int
+	val, ok := pathCount[key]
+	if !ok {
+		newCount = 0 + inc
+	} else {
+		newCount = val + inc
+	}
+
+	if newCount == 0 {
+		delete(pathCount, key)
+	} else {
+		pathCount[key] = newCount
+	}
+}
