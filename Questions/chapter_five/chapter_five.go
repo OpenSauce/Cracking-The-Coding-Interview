@@ -22,6 +22,15 @@ Column 3
 1011 & (~0 << 2) = 1011 & 1111 << 2 = 1010 X 1000
 */
 
-func QuestionOne() {
+func QuestionOne(n, m int32, i, j int) int {
+	if i < 0 || i > j || j >= 32 {
+		return 0
+	}
 
+	val := ^(1 << i)
+
+	for j < i {
+		i++
+	}
+	return 0
 }
