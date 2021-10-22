@@ -22,15 +22,29 @@ Column 3
 1011 & (~0 << 2) = 1011 & 1111 << 2 = 1010 X 1000
 */
 
-func QuestionOne(n, m int32, i, j int) int {
+func QuestionOne(n, m int32, j, i int32) int32 {
 	if i < 0 || i > j || j >= 32 {
 		return 0
 	}
 
-	val := ^(1 << i)
+	allOne := ^0
 
-	for j < i {
-		i++
+	var left int
+	if j < 31 {
+		left = allOne<<j + 1
+	} else {
+		left = 0
 	}
-	return 0
+
+	right := ((1 << i) - 1)
+
+	mask := left | right
+
+	clrN := n & int32(mask)
+	shiftM := m << i
+	return clrN | shiftM
+}
+
+func QuestionTwo(number float32) string {
+	return ""
 }
