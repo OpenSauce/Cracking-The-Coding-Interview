@@ -46,5 +46,51 @@ func QuestionOne(n, m int32, j, i int32) int32 {
 }
 
 func QuestionTwo(number float32) string {
-	return ""
+	if number >= 1 || number <= 0 {
+		return "ERROR"
+	}
+
+	result := "."
+	fraction := float32(0.5)
+	for number > 0 {
+		if len(result) > 32 {
+			return "ERROR"
+		}
+
+		if number >= fraction {
+			result += "1"
+			number -= fraction
+		} else {
+			result += "0"
+		}
+		fraction /= 2
+	}
+	return result
+}
+
+func QuestionThree(num int32) int {
+	if ^num == 0 {
+		return 0
+	}
+
+	currentLength := 0
+	previousLength := 0
+	maxLength := 1
+	for num != 0 {
+		if (num & 1) == 1 {
+			currentLength++
+		} else if (num & 1) == 0 {
+			if num&2 == 0 {
+				previousLength = 0
+			} else {
+				previousLength = currentLength
+			}
+			currentLength = 0
+		}
+		if (previousLength + currentLength + 1) > maxLength {
+			maxLength = previousLength + currentLength + 1
+		}
+		num >>= 1
+	}
+	return maxLength
 }
