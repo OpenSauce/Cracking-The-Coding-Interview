@@ -12,3 +12,7 @@ func TestQuestionTwo(t *testing.T) {
 func TestQuestionThree(t *testing.T) {
 	fmt.Println(QuestionThree(1775))
 }
+
+func TestQuestionFour(t *testing.T) {
+
+}

@@ -94,3 +94,7 @@ func QuestionThree(num int32) int {
 	}
 	return maxLength
 }
+
+func QuestionFour() {
+
+}
