@@ -1,5 +1,7 @@
 package chapter_five
 
+import "fmt"
+
 /*
 Bit Manipulation By Hand
 
@@ -95,6 +97,89 @@ func QuestionThree(num int32) int {
 	return maxLength
 }
 
-func QuestionFour() {
+// func QuestionFour(num int32) {
+// 	var found1, found2 bool
+// 	i := 0
+// 	n := num
+// 	for n != 0 {
+// 		if found1 && found2 {
+// 			return
+// 		}
+// 		if (num&(1<<i)) != 0 && !found1 {
+// 			if (num & (1 << (i + 1))) == 0 {
+// 				temp := num & ^(1 << i)
+// 				temp |= (1 << (i + 1))
+// 				fmt.Println(temp)
+// 				found1 = true
+// 				continue
+// 			}
+// 		} else if (num&(1<<i)) == 0 && !found2 {
+// 			if (num & (1 << (i + 1))) != 0 {
+// 				temp := num & ^(1 << (i + 1))
+// 				temp |= (1 << i)
+// 				fmt.Println(temp)
+// 				found2 = true
+// 				continue
+// 			}
+// 		}
+// 		i++
+// 		n >>= 1
+// 	}
+// }
 
+func QuestionFour(num int) {
+	fmt.Println(getNext(num))
+	fmt.Println(getPrev(num))
+}
+
+func getNext(n int) int {
+	c := n
+	c0 := 0
+	c1 := 0
+
+	for ((c & 1) == 0) && (c != 0) {
+		c0++
+		c >>= 1
+	}
+
+	for (c & 1) == 1 {
+		c1++
+		c >>= 1
+	}
+
+	if c0+c1 == 31 || c0+c1 == 0 {
+		return -1
+	}
+
+	p := c0 + c1
+	n |= (1 << p)
+	n &= ^((1 << p) - 1)
+	n |= (1 << (c1 - 1)) - 1
+	return n
+}
+
+func getPrev(n int) int {
+	temp := n
+	c0 := 0
+	c1 := 0
+	for temp&1 == 1 {
+		c1++
+		temp >>= 1
+	}
+
+	if temp == 0 {
+		return -1
+	}
+
+	for temp&1 == 0 && temp != 0 {
+		c0++
+		temp >>= 1
+	}
+
+	p := c0 + c1
+	n &= (^(0) << (p + 1))
+
+	mask := (1 << (c1 + 1)) - 1
+	n |= mask << (c0 - 1)
+	return n
 }

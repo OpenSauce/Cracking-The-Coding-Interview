@@ -14,5 +14,5 @@ func TestQuestionThree(t *testing.T) {
 }
 
 func TestQuestionFour(t *testing.T) {
-
+	QuestionFour(569)
 }
