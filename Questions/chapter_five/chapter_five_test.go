@@ -16,3 +16,7 @@ func TestQuestionThree(t *testing.T) {
 func TestQuestionFour(t *testing.T) {
 	QuestionFour(569)
 }
+
+func TestQuestionSix(t *testing.T) {
+	fmt.Println(QuestionSix(37, 15))
+}

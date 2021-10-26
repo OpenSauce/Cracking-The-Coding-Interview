@@ -183,3 +183,23 @@ func getPrev(n int) int {
 	n |= mask << (c0 - 1)
 	return n
 }
+
+/*
+Question Five
+
+Works out if it's a power of 2
+
+Absolutely balling!
+
+*/
+
+func QuestionSix(a, b int) int {
+	count := 0
+	c := a ^ b
+
+	for c != 0 {
+		count += c & 1
+		c >>= 1
+	}
+	return count
+}
