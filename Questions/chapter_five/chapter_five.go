@@ -203,3 +203,17 @@ func QuestionSix(a, b int) int {
 	}
 	return count
 }
+
+func QuestionSeven(in int) int {
+	mask := 1
+	for i := 0; i < 16; i++ {
+		mask <<= 2
+		mask++
+	}
+
+	return ((in & mask) << 1) | ((in & (mask << 1)) >> 1)
+}
+
+func QuestionEight() {
+
+}

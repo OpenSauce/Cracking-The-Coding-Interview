@@ -20,3 +20,11 @@ func TestQuestionFour(t *testing.T) {
 func TestQuestionSix(t *testing.T) {
 	fmt.Println(QuestionSix(37, 15))
 }
+
+func TestQuestionSeven(t *testing.T) {
+	fmt.Println(QuestionSeven(27))
+}
+
+func TestQuestionEight(t *testing.T) {
+	fmt.Println()
+}
