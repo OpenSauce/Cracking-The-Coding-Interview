@@ -214,6 +214,60 @@ func QuestionSeven(in int) int {
 	return ((in & mask) << 1) | ((in & (mask << 1)) >> 1)
 }
 
-func QuestionEight() {
+func QuestionEight(screen []byte, width, x1, x2, y int) {
+	drawLine(screen, width, x1, x2, y)
+}
 
+// func drawLine(screen []byte, width, x1, x2, y int) {
+// 	firstBound := width*y + x1
+// 	secondBound := width*y + x2
+// 	firstIndex := firstBound / 8
+// 	firstBit := firstBound % 8
+// 	secondIndex := secondBound / 8
+// 	secondBit := secondBound % 8
+// 	screen[firstIndex] ^= 0
+// 	screen[firstIndex] <<= (8 - firstBit)
+// 	screen[firstIndex] ^= screen[firstIndex]
+
+// 	for i := firstIndex + 1; i < secondIndex; i++ {
+// 		screen[i] ^= 0
+// 	}
+
+// 	screen[secondIndex] ^= 0
+// 	secondIndex <<= (8 - secondBit)
+// }
+
+func drawLine(screen []byte, width, x1, x2, y int) {
+	startOffset := x1 % 8
+	firstByte := x1 / 8
+	if startOffset != 0 {
+		firstByte++
+	}
+
+	endOffset := x2 % 8
+	lastByte := x2 / 8
+	if endOffset != 7 {
+		lastByte--
+	}
+
+	for b := firstByte; b <= lastByte; b++ {
+		screen[(width/8)*y+b] = byte(0xff)
+	}
+
+	startMask := byte(0xff >> startOffset)
+	endMask := byte(0xff >> (endOffset + 1))
+
+	if (x1 / 8) == (x2 / 8) {
+		mask := startMask & endMask
+		screen[(width/8)*y+(x1/8)] |= mask
+	} else {
+		if startOffset != 0 {
+			byteNumber := (width/8)*y + firstByte - 1
+			screen[byteNumber] |= startMask
+		}
+		if endOffset != 7 {
+			byteNumber := (width/8)*y + lastByte - 1
+			screen[byteNumber] |= endMask
+		}
+	}
 }
