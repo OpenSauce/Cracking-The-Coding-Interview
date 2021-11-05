@@ -56,3 +56,25 @@ func getPath(grid [][]int, row int, column int, path []int, failedPoints map[poi
 	failedPoints[point{row, column}] = struct{}{}
 	return false
 }
+
+func QuestionThree(values []int) int {
+	return BinarySearch(values, 0, len(values)-1)
+}
+
+func BinarySearch(values []int, left int, right int) int {
+	if left <= right {
+		mid := (left + right) / 2
+		if values[mid] == mid {
+			return mid
+		}
+
+		if values[mid] > mid {
+			return BinarySearch(values, left, mid-1)
+		}
+
+		if values[mid] < mid {
+			return BinarySearch(values, mid+1, right)
+		}
+	}
+	return -1
+}
