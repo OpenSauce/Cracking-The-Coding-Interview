@@ -1,5 +1,7 @@
 package chapter_eight
 
+import "fmt"
+
 func QuestionOne(n int) int {
 	memo := make([]int, n+1)
 	for i, _ := range memo {
@@ -77,4 +79,19 @@ func BinarySearch(values []int, left int, right int) int {
 		}
 	}
 	return -1
+}
+
+func QuestionFour(set []int) [][]int {
+	var result [][]int
+	for i := 0; i < (1 << len(set)); i++ {
+		var newVal []int
+		for j := 0; j < len(set); j++ {
+			if (i & (1 << j)) > 0 {
+				newVal = append(newVal, set[j])
+			}
+		}
+		fmt.Printf("%+v\n", newVal)
+		result = append(result, newVal)
+	}
+	return result
 }
