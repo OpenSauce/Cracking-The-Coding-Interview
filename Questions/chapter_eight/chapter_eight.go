@@ -95,3 +95,32 @@ func QuestionFour(set []int) [][]int {
 	}
 	return result
 }
+
+func QuestionFive(num1 int, num2 int) int {
+	c := 0
+	t := num1
+	for (t ^ 1) == t+1 {
+		t >>= 1
+		c++
+	}
+	res := multiply(t, num2)
+	return res << c
+}
+
+func multiply(smaller int, bigger int) int {
+	if smaller == 0 {
+		return 0
+	}
+	if smaller == 1 {
+		return bigger
+	}
+
+	s := smaller >> 1
+	halfProd := multiply(s, bigger)
+
+	if smaller%2 == 0 {
+		return halfProd << 1
+	} else {
+		return (halfProd << 1) + bigger
+	}
+}
