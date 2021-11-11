@@ -169,3 +169,8 @@ func MoveTo(n int, origin Stack, dest Stack, buffer Stack) {
 	dest.push(val)
 	MoveTo(n-1, buffer, dest, origin)
 }
+
+// Permuatations of a string
+func QuestionSeven(characters []rune) []string {
+	return nil
+}
