@@ -10,5 +10,5 @@ func TestQuestionFour(t *testing.T) {
 }
 
 func TestQuestionFive(t *testing.T) {
-	fmt.Println(QuestionFive(7, 3))
+	fmt.Println(GetPerms("ABC"))
 }

@@ -171,6 +171,22 @@ func MoveTo(n int, origin Stack, dest Stack, buffer Stack) {
 }
 
 // Permuatations of a string
-func QuestionSeven(characters []rune) []string {
-	return nil
+func GetPerms(characters string) []string {
+	var result []string
+	if len(characters) == 0 {
+		result = append(result, "")
+		return result
+	}
+
+	for i := 0; i < len(characters); i++ {
+		before := characters[:i]
+		after := characters[i+1:]
+		perms := GetPerms(before + after)
+
+		for _, v := range perms {
+			fmt.Println(string(characters[i]) + v)
+			result = append(result, string(characters[i])+v)
+		}
+	}
+	return result
 }
