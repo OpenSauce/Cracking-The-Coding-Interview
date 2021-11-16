@@ -12,3 +12,7 @@ func TestQuestionFour(t *testing.T) {
 func TestQuestionFive(t *testing.T) {
 	fmt.Println(GetPerms("ABC"))
 }
+
+func TestQuestionEight(t *testing.T) {
+	fmt.Println(GetPermsWithDupes("ABCA"))
+}

@@ -190,3 +190,38 @@ func GetPerms(characters string) []string {
 	}
 	return result
 }
+
+// Permuatations of a string w/ duplicates
+func GetPermsWithDupes(characters string) []string {
+	var result []string
+	myMap := buildFreqTable(characters)
+	printPerms(myMap, "", len(characters), result)
+	return result
+}
+
+func buildFreqTable(s string) map[rune]int {
+	myMap := make(map[rune]int)
+	for _, c := range s {
+		if _, ok := myMap[c]; !ok {
+			myMap[c] = 0
+		}
+		myMap[c] = (myMap[c] + 1)
+	}
+	return myMap
+}
+
+func printPerms(myMap map[rune]int, prefix string, remaining int, result []string) {
+	if remaining == 0 {
+		result = append(result, prefix)
+		return
+	}
+
+	for c, _ := range myMap {
+		count := myMap[c]
+		if count > 0 {
+			myMap[c] = count - 1
+			printPerms(myMap, prefix+string(c), remaining-1, result)
+			myMap[c] = count
+		}
+	}
+}
