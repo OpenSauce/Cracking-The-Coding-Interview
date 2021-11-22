@@ -1,5 +1,7 @@
 package chapter_ten
 
+import "sort"
+
 func SortedMerge(array []int, array2 []int) []int {
 	result := make([]int, len(array)+len(array2))
 	indexA := len(array) - len(array2) + 2
@@ -16,4 +18,19 @@ func SortedMerge(array []int, array2 []int) []int {
 	}
 
 	return result
+}
+
+func GroupAnagrams(values []string) []string {
+	mapList := make(map[string][]string)
+	for _, s := range values {
+		key := []rune(s)
+		sort.Slice(key, func(i int, j int) bool { return key[i] < key[j] })
+		mapList[string(key)] = append(mapList[string(key)], s)
+	}
+
+	var res []string
+	for _, v := range mapList {
+		res = append(res, v...)
+	}
+	return res
 }
