@@ -34,3 +34,41 @@ func GroupAnagrams(values []string) []string {
 	}
 	return res
 }
+
+func SearchRotatedArray(values []int, x int) int {
+	return search(values, x, 0, len(values)-1)
+}
+
+func search(values []int, x int, left int, right int) int {
+	if right < left {
+		return -1
+	}
+
+	mid := (left + right) / 2
+	if x == values[mid] {
+		return mid
+	}
+	if values[left] < values[mid] {
+		if values[left] <= x && x < values[mid] {
+			return search(values, x, left, mid-1)
+		} else {
+			return search(values, x, mid+1, right)
+		}
+	} else if values[mid] < values[right] {
+		if values[mid] <= x && x <= values[right] {
+			return search(values, x, mid+1, right)
+		} else {
+			return search(values, x, left, mid-1)
+		}
+	} else {
+		location := -1
+		if values[left] == values[mid] {
+			location = search(values, x, mid+1, right)
+		}
+
+		if location == -1 && values[mid] == values[right] {
+			location = search(values, x, left, mid-1)
+		}
+		return location
+	}
+}
