@@ -72,3 +72,14 @@ func search(values []int, x int, left int, right int) int {
 		return location
 	}
 }
+
+/* Sorted search, no size
+
+Binary search: but we don't know the size so can't start at half. So what is initial pivot? Maybe use the element as the size?
+So element 100, we search at 50?
+
+
+Use an exponential backoff. Use the initial value to see if the array is filled with max incremental values, then exponentially backoff until we find the value.
+
+Find the length using an exponential increment, then use a standard binary search. The two O(log n) still counts as O(log n)
+*/
