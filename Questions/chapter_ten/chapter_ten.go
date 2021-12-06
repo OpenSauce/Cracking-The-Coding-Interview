@@ -1,6 +1,9 @@
 package chapter_ten
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 func SortedMerge(array []int, array2 []int) []int {
 	result := make([]int, len(array)+len(array2))
@@ -83,3 +86,42 @@ Use an exponential backoff. Use the initial value to see if the array is filled 
 
 Find the length using an exponential increment, then use a standard binary search. The two O(log n) still counts as O(log n)
 */
+
+func SparseSearch(vals []string, x string) int {
+	return strSearch(vals, x, 0, len(vals)-1)
+}
+
+func strSearch(vals []string, x string, first, last int) int {
+	if first > last {
+		return -1
+	}
+
+	mid := (first + last) / 2
+
+	if vals[mid] == "" {
+		left := mid - 1
+		right := mid + 1
+		for {
+			if left < right && right > last {
+				return -1
+			} else if right <= last && vals[right] != "" {
+				mid = right
+				break
+			} else if left >= first && vals[left] != "" {
+				mid = left
+				break
+			}
+			right++
+			left--
+		}
+	}
+
+	switch strings.Compare(vals[mid], x) {
+	case 1:
+		return strSearch(vals, x, first, mid-1)
+	case -1:
+		return strSearch(vals, x, mid+1, last)
+	default:
+		return mid
+	}
+}
