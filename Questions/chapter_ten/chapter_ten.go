@@ -125,3 +125,14 @@ func strSearch(vals []string, x string, first, last int) int {
 		return mid
 	}
 }
+
+/* Sort Big File
+Initially, some sort of sort where we don't need to iterate over the whole file, we can sort as we pass through. Space complexity is the most important thing here. Which would lead us to either a bubble sort or a selection sort.
+
+Merge sort: Will need to copy the elements somewhere else, with a large file this is useful as we can partition the file into smaller sizes.
+
+Divide the file into chunks, the size of the file being the amount of memory avaliable, we can sort each chunk seperately then merge theem in one by one.
+
+External sort.
+
+/*
