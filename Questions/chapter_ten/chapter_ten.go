@@ -135,4 +135,12 @@ Divide the file into chunks, the size of the file being the amount of memory ava
 
 External sort.
 
-/*
+*/
+
+/* Missing Int
+
+Create a "bit vecor", an array of bits that are equal to the length of memory we have. We can then iterate through every value and set the bit of that value.
+
+We can then iterate through that bit vector to find a value that has not been set to 1 and is 0.
+
+*/
